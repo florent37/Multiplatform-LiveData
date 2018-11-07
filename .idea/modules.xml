@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-log.iml" filepath="$PROJECT_DIR$/multiplatform-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-log-android/multiplatform-log-android.iml" filepath="$PROJECT_DIR$/multiplatform-log-android/multiplatform-log-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-log-ios/multiplatform-log-ios.iml" filepath="$PROJECT_DIR$/multiplatform-log-ios/multiplatform-log-ios.iml" />
+    </modules>
+  </component>
+</project>
