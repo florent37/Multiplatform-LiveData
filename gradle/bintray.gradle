@@ -1,0 +1,31 @@
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publish = true
+    override = true
+
+    pkg {
+        userOrg = 'florent37'
+        repo = 'maven'
+        name = 'multiplatform-log'
+        licenses = ['Apache-2.0']
+        publications = ['mavenProject']
+
+        version {
+            name = project.version
+            released = new Date()
+            vcsTag = project.version
+
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = System.getenv('BINTRAY_PASSPHRASE')
+                //Optional. The passphrase for GPG signing'
+            }
+        }
+    }
+}
+
+bintrayUpload.doFirst {
+    publications = project.publishing.publications
+}

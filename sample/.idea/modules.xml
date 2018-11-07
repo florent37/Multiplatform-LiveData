@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app_commonMain.iml" filepath="$PROJECT_DIR$/app/app_commonMain.iml" group="app" />
+      <module fileurl="file://$PROJECT_DIR$/app/app_iosMain.iml" filepath="$PROJECT_DIR$/app/app_iosMain.iml" group="app" />
+    </modules>
+  </component>
+</project>

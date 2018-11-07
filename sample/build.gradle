@@ -1,0 +1,25 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.0'
+    }
+}
+repositories {
+    maven { url  "https://dl.bintray.com/florent37/maven" }
+
+    google()
+    jcenter()
+}
+
+
+allprojects {
+    repositories {
+        maven { url "https://dl.bintray.com/florent37/maven" }
+
+        google()
+        jcenter()
+    }
+}

@@ -1,0 +1,6 @@
+//include ':myapplication'
+rootProject.name = 'multiplatform-log'
+enableFeaturePreview('GRADLE_METADATA')
+
+include 'multiplatform-log-ios'
+include 'multiplatform-log-android'
