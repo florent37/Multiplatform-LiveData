@@ -5,6 +5,8 @@ expect open class KLiveData<T>() {
     open val value : T?
 
     fun hasObservers() : Boolean
+
+    fun observe(lifecycle: KLifecycle, block: (T) -> Unit)
 }
 
 expect open class KMutableLiveData<T>() : com.github.florent37.livedata.KLiveData<T> {

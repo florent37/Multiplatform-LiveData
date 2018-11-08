@@ -46,11 +46,15 @@ kotlin {
         }
     }
     sourceSets {
+
+        def logsDataVersion = "1.0.0"
+        def liveDataVersion = "0.0.4"
+
         commonMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib-common'
-                implementation "com.github.florent37:multiplatform-log:1.0.0"
-                implementation "com.github.florent37:multiplatform-livedata:0.0.1"
+                implementation "com.github.florent37:multiplatform-log:$logsDataVersion"
+                implementation "com.github.florent37:multiplatform-livedata:$liveDataVersion"
             }
         }
         commonTest {
@@ -62,8 +66,8 @@ kotlin {
         androidMain {
             dependencies {
                 implementation 'org.jetbrains.kotlin:kotlin-stdlib'
-                implementation "com.github.florent37:multiplatform-log-android:1.0.0"
-                implementation "com.github.florent37:multiplatform-livedata-android:0.0.1"
+                implementation "com.github.florent37:multiplatform-log-android:$logsDataVersion"
+                implementation "com.github.florent37:multiplatform-livedata-android:$liveDataVersion"
             }
         }
         androidTest {
@@ -74,8 +78,8 @@ kotlin {
         }
         iosMain {
             dependencies {
-                implementation "com.github.florent37:multiplatform-log-ios:1.0.0"
-                implementation "com.github.florent37:multiplatform-livedata-ios:0.0.1"
+                implementation "com.github.florent37:multiplatform-log-ios:$logsDataVersion"
+                implementation "com.github.florent37:multiplatform-livedata-ios:$liveDataVersion"
             }
         }
         iosTest {

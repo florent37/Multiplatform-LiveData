@@ -5,7 +5,7 @@ import com.github.florent37.log.Logger
 
 class MainApplication : Application() {
 
-    val dependencyManager by lazy { DependencyManager(this) }
+    val dependencyManager by lazy { DependencyManager() }
 
     override fun onCreate() {
         super.onCreate()

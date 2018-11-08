@@ -3,6 +3,7 @@ package com.github.florent37.livedata
 class KLifecycle {
 
     private val lifecycleStopObservers = mutableListOf<() -> Unit>()
+    val tags = mutableMapOf<String, Any>()
 
     var isStarted : Boolean = false
         get

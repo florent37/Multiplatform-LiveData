@@ -8,7 +8,7 @@ class ViewState(
     val userStatus: String
 )
 
-class MainPresenter(val premiumManager: PremiumManager) {
+class MainViewModel(val premiumManager: PremiumManager) {
     private val tag = "ErrorTag"
     private val viewState = KMediatorLiveData<ViewState>()
 

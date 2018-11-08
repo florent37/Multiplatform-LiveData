@@ -1,26 +1,38 @@
 import UIKit
 import app
 
-class ViewController: UIViewController, MainView {
+class ViewController: UIViewController {
     
-    let presenter: MainPresenter = MainPresenter()
+    var lifecycle = Multiplatform_livedata_iosKLifecycle()
     
-    @IBAction func debugClicked(_ sender: Any) {
-        presenter.displayLogDebug()
-    }
+    lazy var viewModel: MainViewModel = {
+        dependencies().mainViewmodel
+    }()
     
-    @IBAction func errorClicked(_ sender: Any) {
-         presenter.displayLogError()
+    @IBOutlet weak var userStatus: UILabel!
+    @IBAction func becomePremiumClicked(_ sender: Any) {
+        viewModel.becomePremium()
+        if let viewState = viewModel.viewState().value as? ViewState {
+            self.userStatus.text = viewState.userStatus
+        }
     }
     
     override func viewDidLoad() {
-        presenter.bind(view: self)
         super.viewDidLoad()
+        lifecycle.start()
+        
+        viewModel.viewState().observe(lifecycle: lifecycle) { (value) -> KotlinUnit in
+            if let viewState = value as? ViewState {
+                self.userStatus.text = viewState.userStatus
+            }
+            
+            return KotlinUnit()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
-        presenter.unbind()
         super.viewDidDisappear(animated)
+        lifecycle.stop()
     }
     
 }

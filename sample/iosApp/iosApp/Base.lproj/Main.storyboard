@@ -18,30 +18,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SUT-uJ-BdF">
-                                <rect key="frame" x="184" y="63" width="46" height="30"/>
-                                <state key="normal" title="Debug"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jhn-h7-zSc">
+                                <rect key="frame" x="186" y="62" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zhh-8D-TcC">
+                                <rect key="frame" x="146.66666666666666" y="143" width="120.99999999999997" height="30"/>
+                                <state key="normal" title="Become Premium"/>
                                 <connections>
-                                    <action selector="debugClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HDf-27-Q20"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kt3-zO-Z5b">
-                                <rect key="frame" x="190" y="121" width="34" height="30"/>
-                                <state key="normal" title="Error"/>
-                                <connections>
-                                    <action selector="errorClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="F3m-HP-Pdw"/>
+                                    <action selector="becomePremiumClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8Pi-wb-iMr"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Kt3-zO-Z5b" firstAttribute="top" secondItem="SUT-uJ-BdF" secondAttribute="bottom" constant="28" id="9bs-gi-cCv"/>
-                            <constraint firstItem="SUT-uJ-BdF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="43" id="E5O-2y-wvL"/>
-                            <constraint firstItem="Kt3-zO-Z5b" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="s3u-cV-rcj"/>
-                            <constraint firstItem="SUT-uJ-BdF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tNF-n1-rtI"/>
+                            <constraint firstItem="Jhn-h7-zSc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="42" id="4S6-Ox-BuW"/>
+                            <constraint firstItem="Jhn-h7-zSc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N8i-6X-HH9"/>
+                            <constraint firstItem="Zhh-8D-TcC" firstAttribute="top" secondItem="Jhn-h7-zSc" secondAttribute="bottom" constant="60" id="Z07-aW-T5M"/>
+                            <constraint firstItem="Zhh-8D-TcC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="goT-6b-gVn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="userStatus" destination="Jhn-h7-zSc" id="ODl-lQ-vy8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
