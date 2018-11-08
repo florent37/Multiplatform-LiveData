@@ -1,7 +1,7 @@
 publishing {
     repositories {
         maven {
-            url  = 'https://dl.bintray.com/florent37/maven'
+            url  = "https://dl.bintray.com/florent37/$bintray_repo"
         }
     }
 }

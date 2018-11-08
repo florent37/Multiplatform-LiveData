@@ -1,27 +1,24 @@
 package sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.github.florent37.log.Logger
+import androidx.appcompat.app.AppCompatActivity
+import com.github.florent37.livedata.observe
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : AppCompatActivity() {
 
-    private val presenter = MainPresenter()
+    private val viewmodel by lazy { dependencies.mainViewmodel }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Logger.enabled = BuildConfig.DEBUG
-
-        presenter.bind(this)
-
-        debugButton.setOnClickListener {
-            presenter.displayLogDebug()
+        viewmodel.viewState().observe(this){
+            userStatus.text = it.userStatus
         }
-        errorButton.setOnClickListener {
-            presenter.displayLogError()
+
+        premiumButton.setOnClickListener {
+            viewmodel.becomePremium()
         }
     }
 

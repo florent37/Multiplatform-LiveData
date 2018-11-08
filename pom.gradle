@@ -16,7 +16,7 @@ def pomConfig = {
     }
 
     scm {
-        url "https://github.com/florent37/Multiplatform-Log"
+        url "https://github.com/florent37/Multiplatform-LiveData"
     }
 }
 
@@ -24,8 +24,8 @@ def withPom = { pom ->
     pom.withXml {
         def root = asNode()
         root.appendNode('name', project.name)
-        root.appendNode('description', 'Multiplatform Log')
-        root.appendNode('url', 'https://github.com/florent37/Multiplatform-Log')
+        root.appendNode('description', github_description)
+        root.appendNode('url', "https://github.com/florent37/Multiplatform_Livedata")
         root.children().last() + pomConfig
     }
 }

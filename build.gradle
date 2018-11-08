@@ -54,6 +54,7 @@ allprojects {
     }
 
     apply plugin: 'maven'
+    apply plugin: 'idea'
     apply plugin: 'maven-publish'
     apply plugin: 'com.jfrog.bintray'
 
@@ -148,7 +149,7 @@ configure(allprojects) {
                 version project.version
 
                 if (project.name.endsWith('android')) {
-                    artifact("$buildDir/outputs/aar/multiplatform-log-android-debug.aar")
+                    artifact("$buildDir/outputs/aar/$project.name-debug.aar")
                 }
                 artifact sourceJar
 

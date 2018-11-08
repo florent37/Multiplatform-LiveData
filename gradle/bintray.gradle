@@ -6,9 +6,11 @@ bintray {
     override = true
 
     pkg {
+        publish = true
+
         userOrg = 'florent37'
         repo = 'maven'
-        name = 'multiplatform-log'
+        name = "multiplatform-livedata"
         licenses = ['Apache-2.0']
         publications = ['mavenProject']
 

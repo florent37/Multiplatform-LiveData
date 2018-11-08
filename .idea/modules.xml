@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/multiplatform-log.iml" filepath="$PROJECT_DIR$/multiplatform-log.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multiplatform-log-android/multiplatform-log-android.iml" filepath="$PROJECT_DIR$/multiplatform-log-android/multiplatform-log-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multiplatform-log-ios/multiplatform-log-ios.iml" filepath="$PROJECT_DIR$/multiplatform-log-ios/multiplatform-log-ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata.iml" filepath="$PROJECT_DIR$/multiplatform-livedata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata-android/multiplatform-livedata-android.iml" filepath="$PROJECT_DIR$/multiplatform-livedata-android/multiplatform-livedata-android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata-ios/multiplatform-livedata-ios.iml" filepath="$PROJECT_DIR$/multiplatform-livedata-ios/multiplatform-livedata-ios.iml" />
     </modules>
   </component>
 </project>

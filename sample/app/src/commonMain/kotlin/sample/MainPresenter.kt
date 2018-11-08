@@ -1,28 +1,36 @@
 package sample
 
+import com.github.florent37.livedata.KLiveData
+import com.github.florent37.livedata.KMediatorLiveData
 import com.github.florent37.log.Logger
 
-interface MainView {
-}
+class ViewState(
+    val userStatus: String
+)
 
-class MainPresenter {
+class MainPresenter(val premiumManager: PremiumManager) {
     private val tag = "ErrorTag"
-    private var view: MainView? = null
+    private val viewState = KMediatorLiveData<ViewState>()
 
-    fun bind(view: MainView){
-        this.view = view
+    init {
+        viewState.value = ViewState("not premium")
+
+        viewState.addSource(premiumManager.premium()) {
+            Logger.d(tag, "add source called")
+            if(it) {
+                viewState.value = ViewState("premium")
+            } else {
+                viewState.value = ViewState("not premium")
+            }
+        }
     }
 
-    fun unbind(){
-        this.view = null
+    fun viewState() : KLiveData<ViewState> {
+        return viewState
     }
 
-    fun displayLogError(){
-        Logger.e(tag, "my error message")
-    }
-
-    fun displayLogDebug(){
-        Logger.e(tag, "my debug message")
+    fun becomePremium() {
+        premiumManager.becomePremium()
     }
 
 }
