@@ -1,24 +1,63 @@
-# Multiplatform Preferences
+# Multiplatform LiveData
 
-Use a single object : `Logger` in your kotlin shared projects to display logs
+Réimplémentation of android LiveDatas on kotlin-multiplatform
 
-Note you can also use it in your real code on Android & iOs
+It wraps reals livedatas on Android, and uses an Observable-Pattern on iOS
 
-Compatible with kotlin android and kotlin native for iphone
+It works exactly the same as Android LiveDatas : https://developer.android.com/topic/libraries/architecture/livedata
+
+`KLiveData<T>` Read only observable
+`KMutableLiveData<T>` Read / Write observable
+`KMediatorLiveData<T>` Read / Write observable, capable of listen `KLiveData`
 
 ```kotlin
-class MyPresenter {
-    
-    val TAG = "MyPresenter"
+class ViewState(
+    val userStatus: String
+)
+```
 
-    fun start(){
-        Logger.d(TAG, "my message")
-        
-        try{
-            //myMethod
-        } catch(e: Throwable){
-            Logger.e(TAG, e.message, e)
+```kotlin
+class MainViewModel(val premiumManager: PremiumManager) {
+    private val viewState = KMediatorLiveData<ViewState>()
+
+    init {
+        viewState.value = ViewState("not premium")
+
+        viewState.addSource(premiumManager.premium()) {
+            if(it) {
+                viewState.value = ViewState("premium")
+            } else {
+                viewState.value = ViewState("not premium")
+            }
         }
+    }
+
+    fun viewState() : KLiveData<ViewState> {
+        return viewState
+    }
+
+    fun becomePremium() {
+   
+        premiumManager.becomePremium()
+    }
+
+}
+```
+
+```kotlin
+class PremiumManager {
+    private val premium = KMutableLiveData<Boolean>()
+    fun premium() : KLiveData<Boolean> {
+        return premium
+    }
+
+    fun becomePremium() {
+        premium.value = true
+    }
+
+    init {
+        //default value
+        premium.value = false
     }
 }
 ```
@@ -35,7 +74,7 @@ repositories {
 
 ## common
 ```groovy
-implementation "com.gitub.florent37:multiplatform-log:1.0.0"
+implementation "com.gitub.florent37:multiplatform-livedata:1.0.0"
 ```
 
 ## ios
@@ -43,7 +82,7 @@ implementation "com.gitub.florent37:multiplatform-log:1.0.0"
 Uses inside the NSUserDefaults
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-log-ios:1.0.0"
+implementation "com.gitub.florent37:multiplatform-livedata-ios:1.0.0"
 ```
 
 ## android
@@ -51,15 +90,7 @@ implementation "com.gitub.florent37:multiplatform-log-ios:1.0.0"
 Uses inside the SharedPreferences
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-log-android:1.0.0"
-```
-
-# Disable logs on release
-
-Just disable the logger on debug :
-
-```kotlin
-Logger.enabled = BuildConfig.DEBUG
+implementation "com.gitub.florent37:multiplatform-livedata-android:1.0.0"
 ```
  
 ## License
