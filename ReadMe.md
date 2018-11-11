@@ -10,38 +10,33 @@ It works exactly the same as Android LiveDatas : https://developer.android.com/t
 `KMutableLiveData<T>` Read / Write observable
 `KMediatorLiveData<T>` Read / Write observable, capable of listen `KLiveData`
 
+Transformations like `map` and `switchmap` are available too
+
+```kotlin
+class MainViewModel(val premiumManager: PremiumManager) {
+    private val _viewState = KMediatorLiveData<ViewState>()
+    
+    val viewState = KLiveData<ViewState>()
+        get() = _viewState
+
+    init {
+        _viewState.value = ViewState("not premium")
+
+        _viewState.addSource(premiumManager.premium()) {
+            if(it) {
+                _viewState.value = ViewState("premium")
+            } else {
+                _viewState.value = ViewState("not premium")
+            }
+        }
+    }
+}
+```
+
 ```kotlin
 class ViewState(
     val userStatus: String
 )
-```
-
-```kotlin
-class MainViewModel(val premiumManager: PremiumManager) {
-    private val viewState = KMediatorLiveData<ViewState>()
-
-    init {
-        viewState.value = ViewState("not premium")
-
-        viewState.addSource(premiumManager.premium()) {
-            if(it) {
-                viewState.value = ViewState("premium")
-            } else {
-                viewState.value = ViewState("not premium")
-            }
-        }
-    }
-
-    fun viewState() : KLiveData<ViewState> {
-        return viewState
-    }
-
-    fun becomePremium() {
-   
-        premiumManager.becomePremium()
-    }
-
-}
 ```
 
 ```kotlin
@@ -74,23 +69,42 @@ repositories {
 
 ## common
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata:1.0.0"
+implementation "com.gitub.florent37:multiplatform-livedata:0.0.4"
 ```
 
 ## ios
 
-Uses inside the NSUserDefaults
+Uses a kotlin reimplementation of livedatas
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata-ios:1.0.0"
+implementation "com.gitub.florent37:multiplatform-livedata-ios:0.0.4"
 ```
 
 ## android
 
-Uses inside the SharedPreferences
+Uses inside the jetpack's LiveDatas
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata-android:1.0.0"
+implementation "com.gitub.florent37:multiplatform-livedata-android:0.0.4"
+```
+
+You can retrieve the real livedatas stored inside :
+```
+KLiveData<T>.toLivedata : LiveData<T>
+
+KMutableLiveData<T>.toMutableLiveData : MutableLiveData<T>
+
+KMediatorLiveData<T>.toMediatorLivedata : MediatorLivedata<T>
+```
+
+And create KLiveDatas from jetpacks LiveDatas
+
+```
+LiveData<T>.toKLivedata: KLiveData<T>
+
+MutableLiveData<T>.toKMutableLiveData: KMutableLiveData<T>
+
+MediatorLiveData<T>.toKMediatorLivedata: KMediatorLiveData<T>
 ```
  
 ## License
