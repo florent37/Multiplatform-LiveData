@@ -9,10 +9,11 @@ expect open class KLiveData<T>() {
     fun observe(lifecycle: KLifecycle, block: (T) -> Unit)
 }
 
-expect open class KMutableLiveData<T>() : com.github.florent37.livedata.KLiveData<T> {
+expect open class KMutableLiveData<T>() : KLiveData<T> {
     override var value : T?
 }
 
-expect class KMediatorLiveData<T>() : com.github.florent37.livedata.KMutableLiveData<T> {
-    actual fun <S> addSource(other: com.github.florent37.livedata.KLiveData<S>, block: ((S) -> Unit))
+expect class KMediatorLiveData<T>() : KMutableLiveData<T> {
+    fun <S> addSource(other: KLiveData<S>, block: ((S) -> Unit))
+    fun removeSource(other: KLiveData<*>)
 }
