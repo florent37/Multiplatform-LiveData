@@ -1,5 +1,36 @@
 package com.github.florent37.livedata
 
+fun <X, Y> KLiveData<X>.map(mapFunction: (X) -> Y): KLiveData<Y> {
+    val result = KMediatorLiveData<Y>()
+    result.addSource(this) { value ->
+        result.value = mapFunction.invoke(value)
+    }
+    return result
+}
+
+fun <X, Y> KLiveData<X>.switchMap(switchMapFunction: (X) -> KLiveData<Y>): KLiveData<Y> {
+    val result = KMediatorLiveData<Y>()
+
+    var mSource: KLiveData<Y>? = null
+
+    result.addSource(this) { x ->
+        val newLiveData = switchMapFunction.invoke(x)
+        if (mSource === newLiveData) {
+            return@addSource
+        }
+        mSource?.let {
+            result.removeSource(it)
+        }
+        mSource = newLiveData
+        mSource?.let {
+            result.addSource(it) { y ->
+                result.value = y
+            }
+        }
+    }
+    return result
+}
+
 object Transformations {
 
     fun <X, Y> map(
