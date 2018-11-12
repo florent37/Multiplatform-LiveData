@@ -72,7 +72,7 @@ repositories {
  [ ![Download](https://api.bintray.com/packages/florent37/maven/multiplatform-livedata/images/download.svg) ](https://bintray.com/florent37/maven/multiplatform-log/_latestVersion)
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata:0.0.4"
+implementation "com.gitub.florent37:multiplatform-livedata:0.0.5"
 ```
 
 ## ios
@@ -82,7 +82,7 @@ implementation "com.gitub.florent37:multiplatform-livedata:0.0.4"
 Uses a kotlin reimplementation of livedatas
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata-ios:0.0.4"
+implementation "com.gitub.florent37:multiplatform-livedata-ios:0.0.5"
 ```
 
 ## android
@@ -92,7 +92,7 @@ Uses inside the jetpack's LiveDatas
  [ ![Download](https://api.bintray.com/packages/florent37/maven/multiplatform-livedata/images/download.svg) ](https://bintray.com/florent37/maven/multiplatform-log/_latestVersion)
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata-android:0.0.4"
+implementation "com.gitub.florent37:multiplatform-livedata-android:0.0.5"
 ```
 
 You can retrieve the real livedatas stored inside :
