@@ -72,7 +72,7 @@ repositories {
  [ ![Download](https://api.bintray.com/packages/florent37/maven/multiplatform-livedata/images/download.svg) ](https://bintray.com/florent37/maven/multiplatform-log/_latestVersion)
 
 ```groovy
-implementation "com.gitub.florent37:multiplatform-livedata:0.0.5"
+implementation "com.github.florent37:multiplatform-livedata:0.0.5"
 ```
 
 ## ios
