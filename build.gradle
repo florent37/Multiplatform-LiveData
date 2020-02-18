@@ -70,6 +70,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+                api "androidx.lifecycle:lifecycle-livedata:2.0.0"
             }
         }
 
