@@ -7,7 +7,7 @@ pluginManagement {
         }
     }
 }
-rootProject.name = 'sample-preferences'
+rootProject.name = 'sample-livedata'
 enableFeaturePreview('GRADLE_METADATA')
 
 include ':app'
