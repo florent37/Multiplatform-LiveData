@@ -8,7 +8,7 @@ bintray {
     pkg {
         userOrg = 'florent37'
         repo = 'maven'
-        name = 'multiplatform-preferences'
+        name = project.bintray_name
         licenses = ['Apache-2.0']
         publications = ['mavenProject']
 
