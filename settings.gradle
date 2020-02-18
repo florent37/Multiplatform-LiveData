@@ -1,6 +1,3 @@
 //include ':myapplication'
 rootProject.name = 'multiplatform-livedata'
 enableFeaturePreview('GRADLE_METADATA')
-
-include 'multiplatform-livedata-ios'
-include 'multiplatform-livedata-android'

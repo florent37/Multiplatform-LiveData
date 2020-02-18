@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Multiplatform-LiveData-multiplatform-livedata.iml" filepath="$PROJECT_DIR$/Multiplatform-LiveData-multiplatform-livedata.iml" />
       <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata.iml" filepath="$PROJECT_DIR$/multiplatform-livedata.iml" />
       <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata-android/multiplatform-livedata-android.iml" filepath="$PROJECT_DIR$/multiplatform-livedata-android/multiplatform-livedata-android.iml" />
       <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata-ios/multiplatform-livedata-ios.iml" filepath="$PROJECT_DIR$/multiplatform-livedata-ios/multiplatform-livedata-ios.iml" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_commonMain.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_commonMain.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_commonTest.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_commonTest.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosArm64Main.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosArm64Main.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosArm64Test.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosArm64Test.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosMain.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosMain.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosTest.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosTest.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosX64Main.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosX64Main.iml" group="multiplatform-livedata" />
+      <module fileurl="file://$PROJECT_DIR$/multiplatform-livedata_iosX64Test.iml" filepath="$PROJECT_DIR$/multiplatform-livedata_iosX64Test.iml" group="multiplatform-livedata" />
     </modules>
   </component>
 </project>

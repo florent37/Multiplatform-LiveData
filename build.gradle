@@ -1,9 +1,9 @@
 buildscript {
     repositories {
-        mavenLocal()
         google()
         mavenCentral()
         jcenter()
+        mavenLocal()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://dl.bintray.com/jetbrains/kotlin-native-dependencies" }
@@ -12,159 +12,98 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-frontend-plugin:0.0.37"
+
+/*
         classpath("org.jetbrains.kotlin:kotlin-native-gradle-plugin:$kotlin_native_version") {
             exclude group: 'org.jetbrains.kotlin', module: 'kotlin-gradle-plugin'
         }
+*/
         classpath "com.android.tools.build:gradle:$gradle_android_version"
-        classpath group: 'net.rubygrapefruit', name: 'native-platform', version: '0.10'
+        classpath group: 'net.rubygrapefruit', name: 'native-platform', version: '0.21'
         classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintray_plugin_version"
     }
 }
 
 plugins {
-    id 'net.researchgate.release' version '2.6.0'
+    id("org.jetbrains.kotlin.multiplatform").version("1.3.61")
+    id("maven-publish")
 }
 
+apply plugin: 'com.android.library'
+apply plugin: 'com.jfrog.bintray'
 
-static def platformOf(project) {
-    if (project.name.endsWith("-common")) return "common"
-    if (project.name.endsWith("-ios")) return "native"
-    if (project.name.endsWith("-android")) return "android"
-    return "common"
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        minSdkVersion 15
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
 }
 
-allprojects {
-    repositories {
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
-        maven { url 'https://kotlin.bintray.com/kotlinx' }
-        mavenCentral()
-        google()
-        jcenter()
-        mavenLocal()
-    }
-
-    def platform = platformOf(project)
-    if(platform.equals("android")){
-        apply plugin: 'com.android.library'
-        apply plugin: 'kotlin-android'
-        apply plugin: 'kotlin-platform-android'
-    } else {
-        apply plugin: "kotlin-platform-$platform"
-    }
-
-    apply plugin: 'maven'
-    apply plugin: 'idea'
-    apply plugin: 'maven-publish'
-    apply plugin: 'com.jfrog.bintray'
-
-    def useExperimentalAnnotations = [
-            'kotlin.Experimental',
-            'kotlin.experimental.ExperimentalTypeInference'
-            //'kotlinx.io.core.internal.DangerousInternalIoApi',
-            //'kotlinx.io.core.ExperimentalIoApi'
-    ]
-    def useExperimentalOptionString = "-Xuse-experimental=${useExperimentalAnnotations.join(",")}"
-
-    if (platform == 'native') {
-        sourceSets {
-            main {
-                component {
-                    targets = [ 'ios_arm64', 'ios_x64', 'macos_x64' ]
-//                    target 'ios_arm64', 'ios_arm32', 'ios_x64', 'macos_x64', 'linux_x64'
-                    outputKinds = [KLIBRARY]
-                    extraOpts useExperimentalOptionString
-                }
-            }
-            test {
-                component {
-                    extraOpts useExperimentalOptionString
-                }
-            }
-        }
-    } else if (platform == 'common') {
-        compileKotlinCommon {
-            kotlinOptions.freeCompilerArgs += [useExperimentalOptionString]
-        }
-        compileTestKotlinCommon {
-            kotlinOptions.freeCompilerArgs += [useExperimentalOptionString]
-        }
-    } else if (platform == 'android') {
-        /*
-        compileKotlin {
-            kotlinOptions.freeCompilerArgs += [useExperimentalOptionString]
-        }
-        compileTestKotlin {
-            kotlinOptions.freeCompilerArgs += [useExperimentalOptionString]
-        }
-        */
-    }
-
-    if (project.hasProperty('releaseVersion')) {
-        project.version = project.releaseVersion
-    }
-
-    apply plugin: 'maven'
-
-    task sourceJar(type: Jar, dependsOn: classes) {
-        classifier 'sources'
-        if (platform != 'native') {
-            if(platform == "android"){
-                from android.sourceSets.main.java.srcDirs
-            } else {
-                from sourceSets.main.kotlin
-            }
-            duplicatesStrategy DuplicatesStrategy.EXCLUDE
-            if(platform.equals("android")){
-                from android.sourceSets.main.java.srcDirs
-            } else {
-                def platformSrc = sourceSets.main.allSource
-                def commonSrc = rootProject.sourceSets.main.allSource
-                from(platformSrc + commonSrc)
-            }
-
-        }
-    }
-
-    task emptyJar(type: Jar) {
-        classifier 'javadoc'
-    }
-
-    tasks.build.dependsOn(['sourceJar', 'emptyJar'])
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    mavenLocal()
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+    maven { url 'https://kotlin.bintray.com/kotlinx' }
 }
 
-configure(allprojects) {
-    apply from: rootProject.file('pom.gradle')
-    apply from: rootProject.file('gradle/bintray.gradle')
+kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
+    }
 
-    publishing {
-        publications {
-            mavenProject(MavenPublication) {
-                if (!project.name.contains('ios') && !project.name.endsWith('android')) {
-                    from components.java
-                }
-
-                groupId project.group
-                artifactId project.name
-                version project.version
-
-                if (project.name.endsWith('android')) {
-                    artifact("$buildDir/outputs/aar/$project.name-debug.aar")
-                }
-                artifact sourceJar
-
-                artifact emptyJar {
-                    classifier 'javadoc'
-                }
-
-                withPom(pom)
-            }
+    ios {
+        binaries {
+            framework()
         }
     }
 
-    afterReleaseBuild.dependsOn bintrayUpload
+    sourceSets {
+        commonMain {
+            dependencies {
+                implementation "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
+            }
+        }
+
+        androidMain {
+            dependencies {
+                implementation kotlin('stdlib-jdk8')
+            }
+        }
+
+        iosMain {
+            dependsOn(commonMain)
+            iosArm64Main.dependsOn(it)
+            iosX64Main.dependsOn(it)
+        }
+/*
+        iosMain {
+            dependencies {}
+        }
+
+        iosTest {
+            dependencies {}
+        }
+
+        configure([iosX64Main, iosArm64Main, macosX64Main]) {
+            dependsOn iosMain
+        }
+
+        configure([iosX64Test, iosArm64Test, macosX64Test]) {
+            dependsOn iosTest
+        }
+*/
+    }
 }
 
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-common:$kotlin_version"
-}
+apply from: rootProject.file('pom.gradle')
+apply from: rootProject.file('gradle/bintray.gradle')
+apply from: rootProject.file('gradle/publish.gradle')
